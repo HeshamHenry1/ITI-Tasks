@@ -1,0 +1,258 @@
+Wildcard 
+================
+
+ls ~/Music/file*
+* ===> 0 , any Character 
+ls ~/Music/*13
+ls ~/Music/*13*
+============================
+List Hidden Files only without . or .. 
+ls -d ~/Music/.* 
+ls -A ~/Music/| grep '^\.'
+==============================
+list all command start w 
+ls /usr/bin/w* or  ls /bin/w*
+
+
+ls /usr/bin/w?
+    /usr/bin/wc
+ls /usr/bin/w??
+    /usr/bin/who
+
+ls ~/Music/file[a-z]
+    /home/mina/Music/filea  /home/mina/Music/filec
+/home/mina/Music/fileb  /home/mina/Music/filed
+ls ~/Music/file[ac]
+    /home/mina/Music/filea  /home/mina/Music/filec
+ls ~/Music/file[0-5]
+    /home/mina/Music/file1  /home/mina/Music/file4
+    /home/mina/Music/file2  /home/mina/Music/file5
+    /home/mina/Music/file3
+ls ~/Music/file[05]
+    /home/mina/Music/file5
+ls ~/Music/file[15]
+    /home/mina/Music/file1  /home/mina/Music/file5
+
+=================================================================================
+ls -l ~/Music/
+Long List 
+
+
+ls Path File 
+
+
+ls -l ~/Music/file1
+-rw-rw-r-- 1 mina mina 53306936 أغس 11 09:52 /home/mina/Music/file1
+
+ls -lh ~/Music/file1
+-rw-rw-r-- 1 mina mina 51M أغس 11 09:52 /home/mina/Music/file1
+Long List Folder Specific 
+ls -ldh ~/Music/
+drwxrwxr-x 12 mina mina 4.0K أغس 11 09:37 /home/mina/Music/
+
+
+size file 
+=======================
+ls -lh ~/Music/file1
+-rw-rw-r-- 1 mina mina 51M أغس 11 09:52 /home/mina/Music/file1
+
+ls -lh ~/Music/file1 | cut -d " " -f 5
+51M
+
+
+du -sh ~/Music/file1
+51M     /home/mina/Music/file1
+
+        ===================
+Size Folder 
+ls -ldh ====> Not Correct size 
+
+du -sh ~/Music
+
+        ===================
+ls -lt ~/Music/ ==> long list with sorting time modification from new to old  
+ls -ltr ~/Music/ ==>  long list with sorting time modification from old to new
+        ===================
+ls -lSh ~/Music/ ==>long list with sorting Size  from large to small  
+=================================================================================================
+Manaul Pages :- 
+man ===> 9 Section 
+
+man -f passwd 
+passwd (5)           - the password file
+passwd (1ssl)        - OpenSSL application commands
+passwd (1)           - change user password
+
+=================================================================================================
+man 5 passwd  or man -s 5 passwd 
+=================================================================================================
+
+man -k "create a directory"
+apropos "create a directory"
+aprops
+mkdir (2)            - create a directory
+mkdirat (2)          - create a directory
+
+=================================================================================================
+man -a passwd 
+=================================================================================================
+                Users Linux 
+        ==========================
+
+/etc/passwd ====> all users 
+    loginName:x:uid:gid:Comment:home:shell 
+
+USers 
+    root user      ====> 0 
+    service user   ====> 1 :999
+    Normal user    ====> 1000 
+        Sudoers  :  can use sudo 
+        No Sudoers  : can't use sudo 
+
+Create User 
+    sudo useradd adel -s /usr/bin/bash -m -c "Testing" -G ali
+    sudo useradd adel -s /usr/bin/bash -md path 
+    
+    id ===> Current 
+    id adel 
+    sudo passwd adel 
+
+Aya ====>Service User  ======> WebServer 
+                                ||
+                             Hacking
+su - adel 
+pwd 
+/home/adel
+whoami 
+adel
+sudo useradd mahmamed
+[sudo] password for adel: 
+adel is not in the sudoers file.  This incident will be reported.
+exit 
+
+            ====================
+su adel  ===> switch User (Don't Change all Enviroments)
+su - adel  ===> switch User (Change all Enviroments)
+            ====================
+pwd==> /home/mina 
+su adel 
+pwd ==> /home/mina 
+            ====================
+pwd==> /home/mina 
+su - adel 
+pwd ==> /home/adel 
+========================================
+sudo usermod adel -aG sudo 
+id adel 
+    uid=1012(adel) gid=1012(adel) groups=1012(adel),27(sudo),1003(ali)
+su - adel 
+sudo cat /etc/shadow
+
+
+
+mina@mina-G5-5500:~$ sudo userdel adel 
+mina@mina-G5-5500:~$ ls -l /home
+total 40
+drwxr-x---   5   1012  1012 4096 أغس 11 11:00 adel
+===================================================
+sudo userdel adel
+sudo userdel -r adel 
+==================================================
+sudo mkdir /etc/skel/TozWindows
+sudo useradd mostafa -m -s /usr/bin/bash  
+sudo passwd mostafa 
+    su - mostafa 
+    ls ~
+        Document  SwTesting  TozWindows
+==================================================
+groupadd developer -r ====>  
+groupadd test -g 1500
+
+#Create Group with Specific Id 
+sudo groupadd testing-nc -g 1500
+# Check Group 
+tail -1 /etc/group
+#Create Group with Random ID <1000 
+sudo groupadd developer -r 
+# Check Group 
+tail -1 /etc/group
+
+
+sudo useradd hussien -g 1500 -m -s /usr/bin/bash -G developer
+======================================================================================
+
+cat /etc/passwd ====> all users 
+cat /etc/group ===> Groups ,members 
+cat /etc/shadow ====> password 
+cat /etc/gshadow ===> grouppasswd 
+
+======================================================================================
+
+
+switch User ===> su username or su - username
+Logout ===> exit 
+switch Root With Root Password  
+su or su root or su - or su - root
+
+
+switch Root Without Root Password  
+sudo -i or sudo -s 
+
+======================================================================================
+su - adel  -c "whoami;cat /etc/passwd"
+======================================================================================
+Password Policies 
+===================
+passwd  or chage 
+
+
+
+sudo chage adel -l 
+        Last password change                                    : أغس 11, 2025
+        Password expires                                        : never
+        Password inactive                                       : never
+        Account expires                                         : never
+        Minimum number of days between password change          : 0
+        Maximum number of days between password change          : 99999
+        Number of days of warning before password expires       : 7
+
+sudo chage adel -M 30
+        sudo chage adel -l 
+        Last password change                                    : أغس 11, 2025
+        Password expires                                        : سبت 10, 2025
+        Password inactive                                       : never
+        Account expires                                         : never
+        Minimum number of days between password change          : 0
+        Maximum number of days between password change          : 30
+        Number of days of warning before password expires       : 7
+        ============================================
+sudo chage adel -m 15 
+sudo chage adel -w 7 
+        ============================================
+#Account Expire 
+ sudo chage adel -E "2026-03-02"
+        ============================================
+Reset all Values :- 
+sudo chage adel -m 0 -M 99999 -E -1 -W 7
+        ============================================
+who vs w vs whoami 
+
+who vs w ==> all user login all Terminals (Machine )
+whoami ===> current Terminal Only
+        ============================================
+Ownership ====> File /Folder 
+=====================================
+    sudo chwon 
+
+
+
+
+
+
+
+
+
+
+
+Permission 
+============

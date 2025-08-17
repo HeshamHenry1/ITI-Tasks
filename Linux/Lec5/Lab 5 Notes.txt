@@ -1,0 +1,564 @@
+VI Editor :- 
+=====================
+    Editor ====> GUI ===> Notepad(Windows) gedit(Linux)
+    Editor ====> CLI ===> vi,vim,nano ,.........
+    sudo apt install vim 
+
+    vim ===> Improved Vi ===> Activate Arrows , backspace , mouse .....
+
+    vi ~/Music/file ===> Edit file or Create Edit 
+    vi ===> Interactive Tool ===> Need Read Before Edit 
+
+    vi ===>CommandMode ======i,o,a,A,O,I=======> InsertMode
+               ||      <=====  ESC =============
+                :
+               ||
+        Line Command Mode 
+
+
+
+CommandMode :- 
+● h, left arrow, or backspace: left one character.
+● j or down arrow: down one line.
+● k or up arrow: up one line.
+● l, right arrow or space: right one character.
+● w forward one word.
+● b back one word.
+● e to the end of the current word.
+● 0 to the beginning of the line.
+● Enter: down to the beginning of the next line.
+● G Goes to the last line of the file.
+● nG Goes to Line n.
+● :n Goes to Line n.
+● Control-F Pages forward one screen.
+● Control-B Pages back one screen.
+● Control-L refresh the screen.
+● s Substitutes a string for a character at the cursor.
+● x Deletes a character at the cursor.
+● dw Deletes a word or part of the word to the right of the
+cursor.
+● dd Deletes the line containing the cursor.
+● D Deletes the line from the cursor to the right end of the line.
+● :n,nd Deletes Lines n through n.
+● yy copy line cntrl+c
+● dd delete & cut line cntrl+x
+● p paste down  
+● P paste above  
+● / ==> Search for next===>  next n , pervious N
+● ? ==> Search for pervious===> next n , pervious N
+● :%s/mina/ahmed   ===> Replace
+● :%s/mina/ahmed/g ===> Replace Global 
+:set nu ===> Active Numbers for lines 
+Arrows ===> Extend keys ===> 1 Char 
+
+● :set nu, :set nonu show and hide line numbers.
+● :set ic, :set noic ignore or be case sensitive.
+● :set showmode, :set noshowmode display or turn off mode.
+● :w save the file.
+● :w new_file save as new file.
+● :wq, :x, ZZ save and quit.
+● :q! quit without saving.
+● :wq! ==> Save with Forcing (overwrite)
+=====================================================================================
+Redirection :-
+=======================
+ls -l /dev/std*
+    lrwxrwxrwx 1 root root 15 أغس 12 21:05 /dev/stderr -> /proc/self/fd/2
+    lrwxrwxrwx 1 root root 15 أغس 12 21:05 /dev/stdin -> /proc/self/fd/0
+    lrwxrwxrwx 1 root root 15 أغس 12 21:05 /dev/stdout -> /proc/self/fd/1
+
+Change Default Output 
+    cat /etc/passwd ====> Output =====> Terminal 
+    Redirection Output :- 
+        > or 1>    ====> Overwrite
+        >> or 1>>  ====> Append 
+
+    cat /etc/passwd > ~/Music/file
+    #Combine Files in one File 
+        cat /etc/passwd /etc/group /etc/shells > ~/Music/file
+    #list all commands in file 
+        ls /usr/bin > /tmp/commands
+Change Default Error 
+    ls -R / 
+    ls -R / | grep 'etc'
+Redirection Error :- 
+        2>    ====> Overwrite
+        2>>   ====> Append 
+    ls -R / 2> /dev/null | grep 'etc' ===> Terminal OutputOnly (Error go to trash) 
+
+
+How Search on System :-
+===============================
+    ls -R path  2>error | grep 'keyword'
+    find path [options]
+    find / -name 'etc' 2>/dev/null
+    find ~ -size +500M 2>/dev/null
+    chmod 541 ~/Music/file
+    find ~ -perm 541 2>/dev/null
+        /home/mina/Music/file
+    mkdir ~/Music/dirxx
+    chmod 541 ~/Music/dirxx
+    find ~ -perm 541 2>/dev/null
+        /home/mina/Music/file
+        /home/mina/Music/dirxx
+    find ~ -perm 541 -type f 2>/dev/null
+        /home/mina/Music/file
+    find ~ -perm 541 -type d 2>/dev/null
+        /home/mina/Music/dirxx
+    ===========================================
+    locate Vs find   =====> Self Study 
+=====================================================================================
+Change Default Input :- 
+==============================
+Redirection Input :-
+    0< or < ====> Input File 
+    << ====> define End of Input (end of the Here Document)
+    <<< ===> Redirection Variables or String
+
+cat     ==========> Default input Keyboard
+    hello
+    hello
+
+90% Not Need Input File Redirection :- 
+    cat /etc/passwd  or cat < /etc/passwd or  cat 0< /etc/passwd  
+    ls -l /etc/passwd 
+    touch ~/Music/file
+
+Example On tr command 
+==========================
+echo 'Hello mina' | tr ' ' '-'
+    Hello-mina
+echo 'Hello mina' | tr 'a-z' 'A-Z'
+    HELLO MINA
+
+tr ':' '--' /etc/passwd 
+    tr: extra operand ‘/etc/passwd’
+    Try 'tr --help' for more information.
+tr ':' '-' < /etc/passwd  or   tr ':' '-' 0< /etc/passwd
+
+tr 'a-z' 'A-Z'
+    mina
+    MINA
+    ali
+    ALI
+    ^C ===> Cntrl+C 
+
+tr 'a-z' 'A-Z' << test
+    > mina
+    > ali
+    > test
+    MINA
+    ALI
+
+#Redirection Variables or String 
+tr 'a-z' 'A-Z'  "mina ahmed"
+    tr: extra operand ‘mina ahmed’
+    Try 'tr --help' for more information.
+echo "mina ahmed" | tr 'a-z' 'A-Z'
+    MINA AHMED
+
+tr 'a-z' 'A-Z' <<< "mina ahmed"
+    MINA AHMED
+
+name="ahmef nagy mina"
+echo $name | tr 'a-z' 'A-Z'
+    AHMEF NAGY MINA
+tr 'a-z' 'A-Z' $name
+    tr: extra operand ‘ahmef’
+    Try 'tr --help' for more information.
+tr 'a-z' 'A-Z' <<< $name
+    AHMEF NAGY MINA
+
+
+
+
+
+Example of Cat :-
+======================= 
+    cat > ~/Music/file  # cat ==> create file with Data
+
+    cat >~/Music/file 
+        mina
+        ahmed
+        ali
+        Cntrl+D #Exit Save  [[Notes cntrl+c(Exit Without save)]]
+    cat <<EOF > ~/Music/file 
+        > mina
+        > ahmed
+        > EOF
+    cat ~/Music/file
+        mina
+        ahmed
+=============================================================================
+tee ===> Output File + Output Screen
+    cat /etc/passwd | tee ~/Music/file 
+
+wc ====> Count Lines or Words or Character 
+    wc /etc/passwd 
+        58  109 3595 /etc/passwd
+    wc <<< "hello mina"
+        1       2      11
+    wc -l /etc/passwd 
+        58 /etc/passwd
+    wc -c /etc/passwd 
+        3595 /etc/passwd
+    wc -w /etc/passwd 
+        109 /etc/passwd
+    cat /etc/passwd | wc -l  [Pipeline ===> Clean Output]
+        58
+    wc -l /etc/passwd 
+        58 /etc/passwd
+
+
+
+
+grep ===> Grep Filter Record
+    grep 'root' /etc/passwd
+    grep '^g' /etc/passwd  
+    grep 'bash$' /etc/passwd
+    grep -v 'bash$' /etc/passwd #No Match 
+    grep 'Root' /etc/passwd
+    grep -i 'Root' /etc/passwd
+        root:x:0:0:root:/root:/bin/bash
+
+
+
+cut ===> Filter Columns 
+ wc -l /etc/passwd 
+        58 /etc/passwd
+ wc -l /etc/passwd | cut -d " " -f1
+        58
+ ls -lh ~/Music/file1
+    --w-rw-r-- 1 mina mina 51M أغس 11 09:52 /home/mina/Music/file1
+ ls -lh ~/Music/file1 | cut -d " " -f5
+    51M
+/etc/passwd ===> 7 Col 
+    loginName:x:id:gid:comment:home:shell 
+cut -d ":" -f1,7 /etc/passwd 
+    root:/bin/bash
+    daemon:/usr/sbin/nologin
+
+cut -d ":" -f5-7 /etc/passwd 
+    root:/root:/bin/bash
+cut -d ":" -f5-7 /etc/passwd 
+
+cut -d ":" -f5-7 /etc/passwd | grep 'root'
+    root:/root:/bin/bash
+    NetworkManager OpenVPN,,,:/var/lib/openvpn/chroot:/usr/sbin/nologin
+===========================================================================
+sort ===> Sort Alpha 
+sort /etc/passwd 
+
+sort -t ":" -k 3 -n /etc/passwd  ==> form small to big 
+sort -t ":" -k 3 -n -r /etc/passwd  ==> form big to small  
+
+-t : seperator col 
+-k : col 
+-n : number 
+-r : reverse
+
+find max id 
+sort -t ":" -k 3 -n /etc/passwd | tail -1 
+sort -t ":" -k 3 -n -r /etc/passwd | head -1 
+
+sort -t ":" -k 3 -n /etc/passwd | tail -1 | cut -d ':' -f 3
+    65534
+sort -t ":" -k 3 -n /etc/passwd | tail -1 | cut -d ':' -f 1,3
+    nobody:65534
+
+=============================================================================
+diff #Compare Between 2 Files 
+    cp /etc/passwd ~/Videos/mypasswd 
+    diff  ~/Videos/mypasswd  /etc/passwd
+    diff  ~/Videos/mypasswd  /etc/passwd
+        0a1
+        > root:x:0:0:root:/root:/bin/bash
+    cp /etc/passwd ~/Videos/mypasswd
+    diff  ~/Videos/mypasswd  /etc/passwd
+        1d0
+        < mina
+=============================================================================
+Process 
+================
+Any App Running 
+    shell ====> Process 
+    command ====> Process 
+    Application===> Process 
+
+Every Process ===> PID ,Parent PID
+display  Process :- 
+=============================
+ps ====> current process current Terminal 
+
+ps aux ===> all process all users ===> ScreenShout 
+ps -ef ===> all process all users ParentPID 
+
+ps -u mina ===> all process mina user 
+ps -u root ===> all process root user 
+
+pgrep -u mina -l  
+pgrep -l -u mina  
+pgrep -lu mina 
+
+0===> Kernel 
+1===> init(systemd)
+poweron==>BIOS==>grub(bootloader)==>kernel===> systemd/init 
+
+Task Manager ====> top or htop ===> live session about Process Dynamic status 
+
+
+Process(Command) Run :-
+    -foreground  ====> gedit ===> Holding Terminal 
+    -Background  ====> gedit & ===> No Holding Terminal 
+        jobId [Current Terminal ], PID  
+
+    gedit & 
+        [1] 31621
+    jobs ==> Process Background& stopped Current Terminal 
+        [1]+  Running                 gedit &
+    kill %JobID
+    kill %1 ===> Close Process 
+
+Convert from foreground to Background
+    gedit ===cntrl+z===> jobs ===> bg %jobid
+    sleep 10000 ===cntrl+z==> jobs===> bg %jobid
+
+Convert from Background to foreground 
+    jobs ===> fg %jobid
+
+
+Send Signal Process 
+    kill ==> Send any signal (64 signals)===> Bydefault send Terminate signal 
+    list signals 
+        kill -l 
+            15) SIGTERM 18) SIGCONT	19) SIGSTOP 9) SIGKILL
+    1- using JobID (Current Terminal )
+        kill -SIGTERM %1 or kill -15 %1 or kill %1 
+        kill -SIGSTOP %1 or kill -19 %1 
+        kill -SIGCONT %1 or kill -18 %1 
+
+         jobs
+            [1]   Running                 gedit &
+            [2]   Running                 sleep 10000 &
+            [3]-  Running                 sleep 50000 &
+            [4]+  Running                 sleep 60000 &
+         kill -SIGSTOP %4
+            [4]+  Stopped                 sleep 60000
+         jobs
+            [1]   Running                 gedit &
+            [2]   Running                 sleep 10000 &
+            [3]-  Running                 sleep 50000 &
+            [4]+  Stopped                 sleep 60000
+        kill -18 %4
+        jobs
+            [1]   Running                 gedit &
+            [2]   Running                 sleep 10000 &
+            [3]-  Running                 sleep 50000 &
+            [4]+  Running                 sleep 60000 &
+        kill -15 %4
+        jobs
+            [1]   Running                 gedit &
+            [2]   Running                 sleep 10000 &
+            [3]-  Running                 sleep 50000 &
+            [4]+  Terminated              sleep 60000
+    2- Send Signal different Terminal using PID 
+    pgrep -la sleep  ==> Find PID 
+        31974 sleep 10000
+        32038 sleep 50000
+    kill -19 31974
+    kill -18 31974
+    pgrep -la sleep 
+        31974 sleep 10000
+        32038 sleep 50000
+        32728 sleep 2000
+    kill 31974 32038 32728 
+    # Send Singal using Name 
+        pkill -SIGSTOP sleep 
+        pkill -18 sleep 
+        pkill  sleep 
+    # killall  #Send Singal using Name 
+
+#using Pgrep for search 
+    pgrep -la system
+            1 /sbin/init splash
+            362 /lib/systemd/systemd-journald
+            444 /lib/systemd/systemd-udevd
+            689 /lib/systemd/systemd-oomd
+            692 /lib/systemd/systemd-resolved
+            693 /lib/systemd/systemd-timesyncd
+            831 /lib/systemd/systemd-logind
+            832 /lib/systemd/systemd-machined
+            2979 /lib/systemd/systemd --user
+    -x ===> Search for Exact
+list all process mina 
+    pgrep -u -l mina  ===> Error 
+    pgrep -u mina -l  ===> Valid 
+    pgrep -l -u mina  ===> Valid 
+    pgrep -lu mina ===> Valid 
+    pgrep -ul mina ===> Error 
+list all process all user except mina
+    pgrep -u mina -l -v 
+
+nice ======> priority -20 to +19 ===> Big -20 ===>    
+    
+nice -n 5 sleep 500000 & 
+
+top 
+                 pr  Nice 
+ 35939 mina      25   5    8376   2048   2048 S   0.0   0.0   0:00.00 sleep 
+
+ pgrep -la sleep
+    35939 sleep 500000
+ renice -n 0 -p 35939
+    renice: failed to set priority for 35939 (process ID): Permission denied
+sudo renice -n 0 -p 35939
+    35939 (process ID) old priority 5, new priority 0
+sudo renice -n 10 -p 35939
+    35939 (process ID) old priority 0, new priority 10
+============================================================================
+Compress :- 
+======================
+    Size of file 
+        ls -lh ~/Music/file 
+                -rw-rw-r-- 1 mina mina 205M أغس 13 14:13 /home/mina/Music/file
+        du -sh ~/Music/file
+            205M
+    size of folder 
+        du -sh ~
+        du -sh ~/Music
+        du -sh /etc 
+==========================================================================
+sudo apt install ncompress 
+    compress ~/Music/file =====> generate  ~/Music/file.Z
+Display compress file 
+    zcat ~/Music/file.Z 
+Size compress file 
+ls -lh ~/Music/file.Z 
+-rw-rw-r-- 1 mina mina 60M أغس 13 14:13 /home/mina/Music/file.Z
+uncmpress 
+    uncompress ~/Music/file.Z 
+==========================================================================
+time gzip ~/Music/file
+        real	0m4.357s
+        user	0m4.230s
+        sys	0m0.113s
+ls -lh ~/Music/file.gz 
+    -rw-rw-r-- 1 mina mina 34M أغس 13 14:13 /home/mina/Music/file.gz
+gunzip ~/Music/file.gz 
+
+
+time bzip2 ~/Music/file 
+
+real	0m21.331s
+user	0m21.033s
+sys	0m0.171s
+ls -lh ~/Music/file.bz2 
+    -rw-rw-r-- 1 mina mina 27M أغس 13 14:13 /home/mina/Music/file.bz2
+
+bunzip2 ~/Music/file.bz2 
+
+===========================================================================
+zip ~/Music/file.zip ~/Music/file 
+  adding: home/mina/Music/file (deflated 84%)
+ls -lh ~/Music/file.zip
+    -rw-rw-r-- 1 mina mina 34M أغس 13 14:13 /home/mina/Music/file.zip
+===========================================================================
+Archiving :- 
+=====================
+tar cf ~/Music/etc.tar /etc 2>/dev/null
+tar cvf ~/Music/etc.tar /etc 2>/dev/null ==> v visual Output
+tar xvf ~/Music/etc.tar -C ~/Music/ 
+
+
+du -sh /etc 
+    21M	/etc
+du -sh ~/Music/etc.tar or ls -lh ~/Music/etc.tar
+    14M	/home/mina/Music/etc.tar
+
+bzip2 ~/Music/etc.tar 
+bunzip2 ~/Music/etc.tar.bz2 
+
+gzip ~/Music/etc.tar 
+gunzip ~/Music/etc.tar.gz 
+
+Archiving & Compress in one Command:-
+======================================== 
+    tar czvf archive_name.tar.gz /path/to/files_or_directory
+    tar cjvf archive_name.tar.bz2 /path/to/files_or_directory
+    tar cjf ~/Music/etc.tar.bz2 /etc 2> /dev/null
+    tar czf ~/Music/etc.tar.gz /etc 2> /dev/null
+    tar xjf ~/Music/etc.tar.bz2 -C ~/Music
+    tar xzf ~/Music/etc.tar.gz -C ~/Music
+
+==================================================================
+- file ==> some data Stored in Memory 
+- inode ==> internal os DataStructure contains 
+  Specific Information about the File (inodeNumber,Size - 
+  Permissions -TimeStamp -Owner -Group...etc)
+- inode ==> provides a pointer to the to disk blocks
+           contains file data
+		----------------------
+Notes : fileName not Stored at inode
+FileName Stored ==> Directory Entry (Dentry)
+Dentry=NameFile+Inode
+		----------------------
+ls -i fileName 
+find / -inum 35377789 2>/dev/null
+		----------------------
+Hard Linking (two or more file with the Same Inode)
+deleing ?if original file or any hard linking file deleted 
+the other will be valid . 
+
+
+touch ~/Music/original 
+ln ~/Music/original ~/Videos/hard
+ls -i ~/Music/original 
+    1716065 /home/mina/Music/original
+ls -i ~/Videos/hard 
+    1716065 /home/mina/Videos/hard
+
+vi ~/Music/original 
+cat ~/Videos/hard 
+Hello
+rm ~/Music/original 
+cat ~/Videos/hard 
+Hello
+
+------------------------------------------------------------------------
+Characteristicc : 
+- Not Effect size ==> Same inode
+- HardLink Not working on directoy [you must use Hard linking with tar ]
+- Same Parition 
+------------------------------------------------------------------------------------------ 
+Soft Linking [Symbolic ](File Pointing to another file like shortcut in windows)
+deleing ?if original file will become broken.
+
+touch ~/Music/original 
+ln -s ~/Music/original ~/Music/softfile
+ls -l ~/Music/softfile 
+    lrwxrwxrwx 1 mina mina 25 أغس 14 10:34 /home/mina/Music/softfile -> /home/mina/Music/original
+ls -i ~/Music/original 
+    1723041 /home/mina/Music/original
+ ls -i ~/Music/softfile 
+
+vi ~/Music/original 
+cat ~/Music/softfile 
+    hello
+rm ~/Music/original 
+cat ~/Music/softfile 
+    cat: /home/mina/Music/softfile: No such file or directory
+
+softFile ===========> originalFile =======>Data 
+
+
+SoftLink :- 
+    - different inod 
+    - SoftLink working on directoy & file 
+    - different Parition 
+
+Self Study 
+===============
+    - locate vs find 
+    - Package Manager 
+        debian        ===> apt vs dpkg ====> .deb  [Practice]
+        Redhat Family ===> yum vs rpm  ====> .rpm  [Table]

@@ -1,0 +1,566 @@
+Wildcard 
+================
+
+ls ~/Music/file*
+* ===> 0 , any Character 
+ls ~/Music/*13
+ls ~/Music/*13*
+============================
+List Hidden Files only without . or .. 
+ls -d ~/Music/.* 
+ls -A ~/Music/| grep '^\.'
+==============================
+list all command start w 
+ls /usr/bin/w* or  ls /bin/w*
+
+
+ls /usr/bin/w?
+    /usr/bin/wc
+ls /usr/bin/w??
+    /usr/bin/who
+
+ls ~/Music/file[a-z]
+    /home/mina/Music/filea  /home/mina/Music/filec
+/home/mina/Music/fileb  /home/mina/Music/filed
+ls ~/Music/file[ac]
+    /home/mina/Music/filea  /home/mina/Music/filec
+ls ~/Music/file[0-5]
+    /home/mina/Music/file1  /home/mina/Music/file4
+    /home/mina/Music/file2  /home/mina/Music/file5
+    /home/mina/Music/file3
+ls ~/Music/file[05]
+    /home/mina/Music/file5
+ls ~/Music/file[15]
+    /home/mina/Music/file1  /home/mina/Music/file5
+
+=================================================================================
+ls -l ~/Music/
+Long List 
+
+
+ls Path File 
+
+
+ls -l ~/Music/file1
+-rw-rw-r-- 1 mina mina 53306936 أغس 11 09:52 /home/mina/Music/file1
+
+ls -lh ~/Music/file1
+-rw-rw-r-- 1 mina mina 51M أغس 11 09:52 /home/mina/Music/file1
+Long List Folder Specific 
+ls -ldh ~/Music/
+drwxrwxr-x 12 mina mina 4.0K أغس 11 09:37 /home/mina/Music/
+
+
+size file 
+=======================
+ls -lh ~/Music/file1
+-rw-rw-r-- 1 mina mina 51M أغس 11 09:52 /home/mina/Music/file1
+
+ls -lh ~/Music/file1 | cut -d " " -f 5
+51M
+
+
+du -sh ~/Music/file1
+51M     /home/mina/Music/file1
+
+        ===================
+Size Folder 
+ls -ldh ====> Not Correct size 
+
+du -sh ~/Music
+
+        ===================
+ls -lt ~/Music/ ==> long list with sorting time modification from new to old  
+ls -ltr ~/Music/ ==>  long list with sorting time modification from old to new
+        ===================
+ls -lSh ~/Music/ ==>long list with sorting Size  from large to small  
+=================================================================================================
+Manaul Pages :- 
+man ===> 9 Section 
+
+man -f passwd 
+passwd (5)           - the password file
+passwd (1ssl)        - OpenSSL application commands
+passwd (1)           - change user password
+
+=================================================================================================
+man 5 passwd  or man -s 5 passwd 
+=================================================================================================
+
+man -k "create a directory"
+apropos "create a directory"
+aprops
+mkdir (2)            - create a directory
+mkdirat (2)          - create a directory
+
+=================================================================================================
+man -a passwd 
+=================================================================================================
+                Users Linux 
+        ==========================
+
+/etc/passwd ====> all users 
+    loginName:x:uid:gid:Comment:home:shell 
+
+USers 
+    root user      ====> 0 
+    service user   ====> 1 :999
+    Normal user    ====> 1000 
+        Sudoers  :  can use sudo 
+        No Sudoers  : can't use sudo 
+
+Create User 
+    sudo useradd adel -s /usr/bin/bash -m -c "Testing" -G ali
+    sudo useradd adel -s /usr/bin/bash -md path 
+    
+    id ===> Current 
+    id adel 
+    sudo passwd adel 
+
+Aya ====>Service User  ======> WebServer 
+                                ||
+                             Hacking
+su - adel 
+pwd 
+/home/adel
+whoami 
+adel
+sudo useradd mahmamed
+[sudo] password for adel: 
+adel is not in the sudoers file.  This incident will be reported.
+exit 
+
+            ====================
+su adel  ===> switch User (Don't Change all Enviroments)
+su - adel  ===> switch User (Change all Enviroments)
+            ====================
+pwd==> /home/mina 
+su adel 
+pwd ==> /home/mina 
+            ====================
+pwd==> /home/mina 
+su - adel 
+pwd ==> /home/adel 
+========================================
+sudo usermod adel -aG sudo 
+id adel 
+    uid=1012(adel) gid=1012(adel) groups=1012(adel),27(sudo),1003(ali)
+su - adel 
+sudo cat /etc/shadow
+
+
+
+mina@mina-G5-5500:~$ sudo userdel adel 
+mina@mina-G5-5500:~$ ls -l /home
+total 40
+drwxr-x---   5   1012  1012 4096 أغس 11 11:00 adel
+===================================================
+sudo userdel adel
+sudo userdel -r adel 
+==================================================
+sudo mkdir /etc/skel/TozWindows
+sudo useradd mostafa -m -s /usr/bin/bash  
+sudo passwd mostafa 
+    su - mostafa 
+    ls ~
+        Document  SwTesting  TozWindows
+==================================================
+groupadd developer -r ====>  
+groupadd test -g 1500
+
+#Create Group with Specific Id 
+sudo groupadd testing-nc -g 1500
+# Check Group 
+tail -1 /etc/group
+#Create Group with Random ID <1000 
+sudo groupadd developer -r 
+# Check Group 
+tail -1 /etc/group
+
+
+sudo useradd hussien -g 1500 -m -s /usr/bin/bash -G developer
+======================================================================================
+
+cat /etc/passwd ====> all users 
+cat /etc/group ===> Groups ,members 
+cat /etc/shadow ====> password 
+cat /etc/gshadow ===> grouppasswd 
+
+======================================================================================
+
+
+switch User ===> su username or su - username
+Logout ===> exit 
+switch Root With Root Password  
+su or su root or su - or su - root
+
+
+switch Root Without Root Password  
+sudo -i or sudo -s 
+
+======================================================================================
+su - adel  -c "whoami;cat /etc/passwd"
+======================================================================================
+Password Policies 
+===================
+passwd  or chage 
+
+
+
+sudo chage adel -l 
+        Last password change                                    : أغس 11, 2025
+        Password expires                                        : never
+        Password inactive                                       : never
+        Account expires                                         : never
+        Minimum number of days between password change          : 0
+        Maximum number of days between password change          : 99999
+        Number of days of warning before password expires       : 7
+
+sudo chage adel -M 30
+        sudo chage adel -l 
+        Last password change                                    : أغس 11, 2025
+        Password expires                                        : سبت 10, 2025
+        Password inactive                                       : never
+        Account expires                                         : never
+        Minimum number of days between password change          : 0
+        Maximum number of days between password change          : 30
+        Number of days of warning before password expires       : 7
+        ============================================
+sudo chage adel -m 15 
+sudo chage adel -w 7 
+        ============================================
+#Account Expire 
+ sudo chage adel -E "2026-03-02"
+        ============================================
+Reset all Values :- 
+sudo chage adel -m 0 -M 99999 -E -1 -W 7
+        ============================================
+who vs w vs whoami 
+
+who vs w ==> all user login all Terminals (Machine )
+whoami ===> current Terminal Only
+        ============================================
+Ownership ====> File /Folder 
+=====================================
+    sudo chown ali ~/Music/file1  ===> OwnerShip user 
+    ls -l ~/Music/file1
+        -rw-rw-r-- 1 ali mina 53306936 أغس 11 09:52 /home/mina/Music/file1
+
+    sudo chown :raslan ~/Music/file1  ===> OwnerShip Group 
+    sudo chgrp :raslan ~/Music/file1  ===> OwnerShip Group
+
+    OwnerShip USer & Group 
+        sudo chown mina:mina ~/Music/file 
+
+Display OwnerShip File /Folder 
+=====================================
+ls -l ~/Music/file 
+ls -dl ~/Music 
+drwxrwxr-x 12 mina mina 4096 أغس 11 15:20 /home/mina/Music/
+
+r ==> Read Book 
+w ==> take Book 
+x ==> Enter Library 
+
+staff      rwx                                       
+student    r-x    ====> Manager ====>  Library 
+guest      --x 
+
+
+
+
+
+
+
+
+
+
+Permission 
+============
+User Permission
+Group Permission   ===> Kernel   ===> File/Folder
+Other Permission                     (OwnerShip)   
+                =================================
+ls -l ~/Music/file1
+-rw-rw-r-- 1 mina mina 53306936 أغس 11 09:52 /home/mina/Music/file1
+User Permission  =rw-
+Group Permission =rw- 
+Other Permission =r--
+                =================================
+ls -ld ~/Music
+drwxrwxr-x 12 mina mina 4096 أغس 11 15:20 /home/mina/Music
+
+==============================================================================================
+             File                       Folder 
+
+r        Read(cat,head,tail,..)           ls  
+w        Edit(File)                  EditFolder(Add File touch , delete rm , Rename,)
+x        Run File                    cd   (rx ls -l )
+
+=============================================================================================
+
+Change Permission ===> chmod 
+- Symbolic
+    u,g,o,a,r,w,x + ,- ,=
+    Add Permission x for user 
+        chmod u+x ~/Music/file 
+    Remove Permission x for user , put group r only , remove all Permission other 
+        chmod u-x,g=r,o= ~/Music/file 
+    put all Permission 
+        chmod a=rwx ~/Music/file 
+    Add x for user ,group , other 
+        chmod a+x ~/Music/file 
+    check permission 
+        file : ls -l path 
+        folder : ls -ld path 
+    
+-Numeric  
+        rwx 
+        421
+
+    u=rw , g= r , o= 
+chmod 640 ~/Music
+            ===============================================
+
+Practice :- 
+vi ~/Desktop/TestingNc/test   # vi Text Editor for Edit File 
+bash ~/Desktop/TestingNc/test # Run Script Without Execute 
+    We Love eng.Mina & Linux
+~/Desktop/TestingNc/test  # Run Script ===> without x ==> Permission denied 
+    bash: /home/mina/Desktop/TestingNc/test: Permission denied
+
+ls -l ~/Desktop/TestingNc/test 
+    -rw-rw-r-- 1 mina mina 33 أغس 12 10:08 /home/mina/Desktop/TestingNc/test
+
+==================================================================================
+chmod u=x ~/Desktop/TestingNc/test 
+~/Desktop/TestingNc/test #Run Execute Only need rx  
+    /usr/bin/bash: /home/mina/Desktop/TestingNc/test: Permission denied
+
+chmod u=rx ~/Desktop/TestingNc/test 
+
+ls -l ~/Desktop/TestingNc/test 
+    -r-xrw-r-- 1 mina mina 33 أغس 12 10:08 /home/mina/Desktop/TestingNc/test
+
+~/Desktop/TestingNc/test  #Run With path 
+    We Love eng.Mina & Linux
+            =================================================
+chmod u= ~/Desktop/TestingNc/test 
+    ls -l ~/Desktop/TestingNc/test 
+    ----rw-r-- 1 mina mina 33 أغس 12 10:08 /home/mina/Desktop/TestingNc/test
+cat ~/Desktop/TestingNc/test
+    cat: /home/mina/Desktop/TestingNc/test: Permission denied
+chmod u=wx ~/Desktop/TestingNc/test 
+ls -l ~/Desktop/TestingNc/test 
+        --wxrw-r-- 1 mina mina 33 أغس 12 10:08 /home/mina/Desktop/TestingNc/test
+cat ~/Desktop/TestingNc/test
+    cat: /home/mina/Desktop/TestingNc/test: Permission denied
+chmod u=r ~/Desktop/TestingNc/test 
+    cat ~/Desktop/TestingNc/test
+    echo "We Love eng.Mina & Linux"
+
+===============================================================================================
+vi ~/Desktop/TestingNc/test 
+
+cat ~/Desktop/TestingNc/test 
+    print("we love linux and we hate windows except khaled ")
+
+python3 ~/Desktop/TestingNc/test 
+        we love linux and we hate windows except khaled
+
+~/Desktop/TestingNc/test 
+        bash: /home/mina/Desktop/TestingNc/test: Permission denied
+
+chmod u+x ~/Desktop/TestingNc/test 
+ ~/Desktop/TestingNc/test 
+    /home/mina/Desktop/TestingNc/test: line 1: syntax error near unexpected token `"we love linux and we hate windows except khaled "'
+    /home/mina/Desktop/TestingNc/test: line 1: `print("we love linux and we hate windows except khaled ")'
+
+which python  ===> Display Path for Command or interperter 
+    /usr/bin/python
+
+vi ~/Desktop/TestingNc/test # Add Magic Line  #! /usr/bin/python3
+
+cat ~/Desktop/TestingNc/test 
+    #! /usr/bin/python3
+    print("we love linux and we hate windows except khaled ")
+
+~/Desktop/TestingNc/test # Run With PAth 
+    we love linux and we hate windows except khaled 
+=================================================================================================
+~/Desktop/TestingNc$ test2
+Command 'test2' not found, did you mean:
+  command 'testr' from deb python3-testrepository (0.0.20-6)
+  command 'test' from deb coreutils (8.32-4.1ubuntu1.2)
+Try: sudo apt install <deb name>
+        ============================================================================
+~/Desktop/TestingNc$ ./test2
+we love linux and we hate windows except khaled 
+                ============================================================================
+mina@mina-G5-5500:~/Desktop/TestingNc$ cat test2
+#! /usr/bin/python3
+print("we love linux and we hate windows except khaled ")
+        ============================================================================
+cat ./test2
+    #! /usr/bin/python3
+    print("we love linux and we hate windows except khaled ")
+PATH=$PATH:~/Desktop/TestingNc
+test2
+    we love linux and we hate windows except khaled 
+echo $PATH 
+    /home/mina/.miniconda3/condabin:/home/mina/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/mina/Music:/home/mina/Videos:/home/mina/Music/BashCommand/:/home/mina/Desktop/Python_Nc:/home/mina/.miniconda3/bin:/home/mina/Desktop/TestingNc
+vi ~/.bashrc
+        ============================================================================
+
+
+                file                 FolderSource                 FolderDes
+copy            r--                       --x                       -wx
+move            ---                       -wx                       -wx 
+
+                file                   folder 
+delete          ---                     -wx 
+Rename          ---                     -wx 
+
+
+                Folder        FolderSource                 FolderDes   
+Copy            rx              --x                           -wx
+===========================================================================
+Display Default Permission 
+umask ===>0002
+
+           umask                        Permission 
+            0                            7-0=7   rwx  
+            0                            7-0=7   rwx
+            2                            7-2=5   r-x 
+
+umask -S 
+u=rwx,g=rwx,o=rx
+
+
+
+touch ~/Music/fileperm # notes : File Can't take Execute(x) By Default
+    ls -l ~/Music/fileperm 
+        -rw-rw-r-- 1 mina mina 0 أغس 12 11:47 /home/mina/Music/fileperm
+mkdir ~/Music/dirperm
+    ls -ld ~/Music/dirperm/ 
+        drwxrwxr-x 2 mina mina 4096 أغس 12 11:47 /home/mina/Music/dirperm/
+
+
+
+How Change umask 
+====================
+    usmask -S u=rwx,g=rx,o=x 
+    touch ~/Music/file 
+    ls -l  ~/Music/file 
+            -rw-r---- 1 mina mina 0 أغس 12 11:47 /home/mina/Music/file
+    touch ~/Music/dir 
+    ls -ld  ~/Music/dir 
+            -rwxr-x--x 1 mina mina 0 أغس 12 11:47 /home/mina/Music/dir
+
+===================================================================================
+list all Shells =====> cat /etc/shells 
+
+All Enviroments Variables current Shell  
+    printenv or env 
+
+All Enviroments Variables Specific Shell 
+    man bash     /Variables ====n===> Shell Variables
+
+
+CLI ====> Terminal ===> Shell ===> kernel 
+
+
+Types Variables
+    Enviroments Variables :-
+        HOME , USER , SHELL,PS1.PS2,PATH,.... 
+    Peredefined Variables 
+        $$ --> Current PID 
+        $0 --> Current Shell 
+        $? ---> status last Command 
+    User Variables 
+        x=4 
+        name=mina 
+
+echo $HOME 
+
+
+PS1="\u : \t : \W"
+
+
+PS2 ===> Command Write More Than One Line 
+==================================================================
+echo 'hello
+> mina
+> '
+hello
+mina
+
+echo name \
+> mina
+
+PS2="iti>>>"
+echo 'hello
+    iti>>>'
+    hello
+==========================================================================
+Type of Commands 
+====================
+    Internal command 
+    External Command 
+    alias 
+
+type python ====> Path ===> External 
+
+type cd 
+    cd is a shell builtin
+type if
+    if is a shell keyword
+type [
+    [ is a shell builtin
+type test
+    test is a shell builtin
+type cat 
+    cat is /usr/bin/cat
+type c 
+    c is aliased to `clear'
+
+
+
+alias name="command"
+alias ll="ls -l"
+=======================================================================
+/etc/bash.bashrc  ===> initalization file for all user & all Terminal 
+~/.bashrc  ===> initalization file for Specific user & all Terminal 
+=======================================================================
+initalization Files 
+            Login Terminal                         Non Login Terminal 
+/etc/bash.bashrc                                    /etc/profile 
+~/.bashrc                                          ~/.profile
+                                                   /etc/bash.bashrc        
+                                                   ~/.bashrc
+
+Initalization FIles Different shell 
+=====================================
+man Bash /FILES ====> n for next 
+man ksh /FILES ====> n for next 
+man sh /FILES ====> n for next 
+man zsh /FILES ====> n for next 
+
+sudo apt install ksh 
+sudo apt install zsh
+====================================================================================
+
+.bash_history ===> File store history Commands 
+
+Terminal ===> history ===> currentTerminal +history file 
+
+
+!2008
+cat /etc/shadow 
+cat: /etc/shadow: Permission denied
+sudo !!
+====================================================================================
+sudo apt install vim 
+
+vi 
+====================================================================================

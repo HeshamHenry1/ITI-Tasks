@@ -1,0 +1,354 @@
+Open Source Software Free Software ? 
+========================================
+Free ====> freedom 
+View Source 
+Modify 
+distrubute 
+
+=======================================================
+Linux Distribution  ? 
+=======================
+1- different target User 
+Hacking ====> kali 
+Developer ====> ubuntu 
+Server ====> Redhat centos ....
+        =================================
+2- Different Desktop Enviroments 
+        ===========================
+3- Different Family Different Package Manager 
+
+
+Package Manager ====> Tool install or Remove or update or download Package .
+    Different Family 
+        Debian ====> sudo apt install vim 
+        Redhat ====> sudo yum install vim 
+
+        Cross Package Manager 
+            snap      ===> CLI +GUI 
+            flatpak   ===> CLI +GUI 
+
+            snap install zoom 
+        .
+
+Programming Language 
+    python ===> pip install pymongo 
+    node ===> npm 
+    ..........
+
+
+
+Linux Component :- 
+========================
+       Terminal     -----------> Shell ---------------------------> Kernel 
+  Place Write Command     Interperter Command (Translate)          Execute Command 
+
+
+Shell ====> Translator or Scripting Language 
+
+
+Shell Different Types ;- 
+    ksh 
+    sh 
+    bash 
+    zsh 
+
+
+List all shells in system :- 
+===============================
+cat /etc/shells 
+=============================================================
+current Shell :- 
+======================
+current shell current User ====> echo $SHELL 
+current shell current Terminal ====> echo $0
+================================================================================
+alias c="clear"
+================================================================================
+echo Display Text :- 
+=========================
+How Display Text 
+===================
+echo we love linux and we hate windows
+echo "we love linux and we hate windows"
+echo 'we love linux and we hate windows'
+
+Ignore Special Character 
+========================
+echo we 3> linux & we hate windows # Logical Error Special Character
+echo we \3> linux \& we hate windows
+echo 'we 3> linux & we hate windows'
+echo "we 3> linux & we hate windows"
+echo we '3>' linux '&' we hate windows
+
+How Display Variable 
+name="mina"
+echo name  =========> name
+echo $name  =========> mina
+
+✔  echo $nameahmed
+✔  echo $name ahmed  ===> mina ahmed
+✔  echo ${name}ahmed ===> minaahmed
+
+✔  echo ${name:2} na
+✔  echo ${name:3} a 
+
+' ' ===> Strong QOutign ====> ignore all Special Character
+✔  echo '$name 3> linux & $name hate windows'
+         $name 3> linux & $name hate windows
+""  ===> weak QOutign ====> ignore some Special Character
+✔  echo "$name 3> linux & $name hate windows"
+        mina 3> linux & $name hate windows
+✔  echo $name 3'>' linux '&' $name hate windows
+
+✔ echo "hello \n mina"
+
+✔ echo -e "hello \n mina"
+hello 
+mina
+==========================================================
+command [Opitions] [Arguments]
+
+Options===> change Default Behaviour Command 
+
+uname ===> information System
+uname ===> Linux
+uname -a ==> all information 
+
+uname -r -v  uname -rv
+
+===================================
+Manual Page :- 
+==================
+man command 
+
+
+date +%d ==> Day 10
+date +%D ===> 08/10/25
+====================================
+sudo apt install ncal
+
+cal 
+cal 2005 
+cal 3 2005
+cal mar 2005
+====================================
+whoami ===> mina
+=====================================
+
+ThisPC ===> C ===> Users ===> mina .......
+            D 
+
+/
+    /bin ====> commands 
+    /sbin ===> super commands 
+    /lib ===> lib
+    /usr/bin ====> commands 
+    /usr/sbin ===> super commands 
+    /usr/lib ===> lib
+    /boot ===> bootloader Kernel 
+    /home ===> all Home Directory all users 
+        /home/mina 
+    /root ===> home Directory Root 
+    /opt ====> programmes 
+    /dev ===> devices 
+    /etc ===> All configuration File 
+    /tmp ===> Temp files 
+    /var ===> Variables SIze file 
+    /mnt /media ===> 
+    Mounting =====> Manual VS Automatic 
+
+
+/etc/shells ===> all shells 
+/etc/passwd ===> all users 
+
+
+
+
+
+
+
+
+
+Display File 
+==============================
+  cat pathfile ====> one Page 
+  cat /etc/shells 
+  cat /etc/passwd 
+  cat /home/mina/file.txt 
+
+  cat /etc/shells /etc/passwd 
+  less or more  ===> file Page by page 
+less /etc/passwd 
+
+   tail -1 /etc/passwd  or tail -n 1 /etc/passwd 
+   tail -n 2 /etc/passwd  or tail -2 /etc/passwd 
+   head -1 /etc/passwd  or head -n 1 /etc/passwd 
+
+
+Where am i? 
+    pwd 
+
+
+
+Path file ====> /home/mina/Music/file 
+Path file ====> /home/mina/Music/file/ XX Error 
+Path folder ====> /home/mina/Music/test  ==> valid
+Path folder ====> /home/mina/Music/test/ ==> valid
+
+
+~ ===> /home/userLogin 
+
+How to change Directory 
+=============================
+cd .. ===> One Step Back 
+cd ../.. ===> Two Step Back 
+
+Go to Home :- 
+===============
+cd 
+cd ~
+cd $HOME 
+cd /home/userlogin
+        =======================
+go to / 
+    cd /
+    =============================
+cd /etc 
+cd /home/mina 
+cd - ====> Pervious Directory 
+
+        ====================================================
+How Create Files 
+===================
+touch ~/Music/test 
+touch ~/Music/test{1..20}
+touch ~/Music/file ~/Videos/file 
+
+
+
+
+                ========================================
+How Create Directory 
+=====================
+mkdir ~/Music/test ~/Videos/test2
+
+mkdir -p ~/Music/dir/dir11
+
+mkdir -p ~/Music/dir/{dir13,dir12}
+
+
+
+Notes :- 
+Can't create File and Foleder in Same Name 
+touch test 
+mkdir test 
+    mkdir: cannot create directory ‘test’: File exists
+
+mkdir dir 
+touch dir 
+================================================================================
+Copy File 
+    cp /etc/passwd ~/Music   ===> passwd 
+    cp /etc/passwd ~/Music/newpasswd   ===> newpasswd  #Copy & Rename 
+    cp /etc/passwd ~/Music/test
+    # Copy Multi Files 
+    cp /etc/passwd /etc/shells /etc/group ~/Music
+    # Warning for overwrite
+    cp -i /etc/passwd ~/Music/
+        cp: overwrite '/home/mina/Music/passwd'? y
+
+
+Copy Folder 
+    cp -r ~/Videos ~/Music
+    cp -r ~/Videos ~/Music/test ===> Copy & Rename
+    cp ~/Videos ~/Picture ~/Music
+
+Delete 
+    rm ~/Music/shells 
+    rm -i ~/Music/group 
+        rm: remove regular file '/home/mina/Music/group'? y
+    rm ~/Music/{file,test}
+    rm ~/Music/file ~/Videos/test 
+    rm ~/Music/file{1..100}
+
+Delete Folder
+    rmdir -i ~/Music/test #Empty Folder only 
+
+    rm -r ~/Music/dir/
+
+    rm -r -i ~/Music/*  Delete all Data in Music Without Delete Music
+
+Remove from Child to parents 
+    rmdir -p ~/Music/dir1
+    rmdir -p ~/Music/dir1
+    rmdir: failed to remove directory '/home/mina': Permission denied
+
+Move 
+    mv ~/Videos/file ~/Music
+    mv ~/Videos ~/Music
+    
+Rename 
+    mv ~/Music/file1 ~/Music/file2
+    mv ~/Videos/ ~/Videos2
+
+================================================================================
+What inside Folder ? 
+===================================
+ touch ~/Music/test
+ mkdir ~/Music/dir1
+ touch ~/Music/dir1/file
+ 
+ls ~/Music/
+        dir1  file2  test
+ls ~/Music/dir1/
+        file
+ls -F ~/Music/
+        dir1/  file2  test
+ls -F /
+bin@    etc/                lib32@       media/  root/  srv/  var/
+boot/   home/               lib64@       mnt/    run/   sys/
+cdrom/  install-script.sh*  libx32@      opt/    sbin@  tmp/
+dev/    lib@                lost+found/  proc/   snap/  usr/
+
+======================================================================
+List all Folder only 
+===================================
+ls -F ~/Music/ | grep '/'
+dir1/
+
+
+
+ls -F / | grep '/'
+ls -F / | grep '*'
+
+
+        =========================================
+ls -R ~/Music/ ==> Recursive 
+        ============================================
+ls -a ~/Music
+
+touch ~/Music/.mina
+ls -a ~/Music
+    .  ..  dir1  file2  .mina  test
+ls ~/Music/
+dir1  file2  test
+    
+ls -A ~/Music
+dir1  file2  .mina  test
+
+
+================================================================================
+Why using CLI ?
+=============================
+    Command Line Interface [Terminal ===> shell ===> kernel]
+    1- fast , Powerful 
+        touch file{1..100}
+    2- less Resource Better Server 
+    3- More Secure Remotely connect ssh 
+    4- falling in Love 
+
+
+
+User === GUI ===> App 
+Developer ====CLI===> APP
+APP === API(SystemCall) ====> APP 

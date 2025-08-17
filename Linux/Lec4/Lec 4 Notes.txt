@@ -1,0 +1,96 @@
+VI command
+3 modes
+command mode - insert mode - last line mode
+command mode
+insert mode --> [i,o,a,A,I,O], command mode, last line mode --> [u,yy,dd,p,P,ctrl+r,dw,w,yw,D,x,X,(:9,20d),(:9,20y),(:2,5 co 14),(:2,5 m 14)],h,j,k,l,x,:qw!,w newfile,
+D--> (cut and put in the same line you paste)
+search for this using sheet sheet
+
+| **Mode**                      | **Command**   | **Name / Action**               | **Explanation**                                                            |
+| ----------------------------- | ------------- | ------------------------------- | -------------------------------------------------------------------------- |
+| **Insert Mode**               | `i`           | Insert before cursor            | Switch to insert mode and start typing **before** current cursor position. |
+|                               | `I`           | Insert at beginning of line     | Move cursor to first non-blank character of line, then insert.             |
+|                               | `a`           | Append after cursor             | Switch to insert mode and start typing **after** current cursor position.  |
+|                               | `A`           | Append at end of line           | Move to end of current line, then insert.                                  |
+|                               | `o`           | Open new line below             | Create a new empty line **below** current line, enter insert mode.         |
+|                               | `O`           | Open new line above             | Create a new empty line **above** current line, enter insert mode.         |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Command Mode**              | `h`           | Move left                       | Move cursor left by one character.                                         |
+|                               | `l`           | Move right                      | Move cursor right by one character.                                        |
+|                               | `j`           | Move down                       | Move cursor down one line.                                                 |
+|                               | `k`           | Move up                         | Move cursor up one line.                                                   |
+|                               | `x`           | Delete character under cursor   | Removes character at cursor position.                                      |
+|                               | `X`           | Delete character before cursor  | Removes character before the cursor.                                       |
+|                               | `u`           | Undo                            | Reverts last change.                                                       |
+|                               | `Ctrl+r`      | Redo                            | Re-applies undone changes.                                                 |
+|                               | `yy`          | Yank (copy) whole line          | Copies current line to buffer.                                             |
+|                               | `yw`          | Yank word                       | Copies word under cursor.                                                  |
+|                               | `dd`          | Delete (cut) whole line         | Removes current line and stores in buffer.                                 |
+|                               | `dw`          | Delete (cut) word               | Removes from cursor to end of word.                                        |
+|                               | `D`           | Delete until end of line        | Removes everything from cursor to end of line.                             |
+|                               | `p`           | Paste after cursor/line         | Pastes buffer content **after** current position.                          |
+|                               | `P`           | Paste before cursor/line        | Pastes buffer content **before** current position.                         |
+|                               | `:9,20d`      | Delete range of lines           | Deletes lines **9 to 20**.                                                 |
+|                               | `:9,20y`      | Yank range of lines             | Copies lines **9 to 20**.                                                  |
+|                               | `:2,5 co 14`  | Copy lines 2–5 to after line 14 | `co` = copy.                                                               |
+|                               | `:2,5 m 14`   | Move lines 2–5 to after line 14 | `m` = move.                                                                |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Last-Line Mode**            | `:w`          | Save file                       | Writes (saves) current file.                                               |
+|                               | `:w newfile`  | Save as new file                | Writes buffer into a new file without closing original.                    |
+|                               | `:q`          | Quit                            | Exits vi if no unsaved changes.                                            |
+|                               | `:q!`         | Quit without saving             | Ignores changes and exits.                                                 |
+|                               | `:wq` or `:x` | Save and quit                   | Writes changes then exits.                                                 |
+|                               | `:wq!`        | Save (force) and quit           | Saves even if file is read-only.                                           |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Extra Useful (Not Listed)** | `gg`          | Go to first line                | Moves to start of file.                                                    |
+|                               | `G`           | Go to last line                 | Moves to end of file.                                                      |
+|                               | `:n`          | Go to line number `n`           | Example: `:15` jumps to line 15.                                           |
+|                               | `/word`       | Search forward                  | Finds the word forward in file.                                            |
+|                               | `?word`       | Search backward                 | Finds the word backward in file.                                           |
+|                               | `n`           | Repeat last search forward      | Moves to next match.                                                       |
+|                               | `N`           | Repeat last search backward     | Moves to previous match.                                                   |
+|                               | `%`           | Jump to matching bracket/brace  | Moves cursor between `{}`, `[]`, or `()`.                                  |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+================================================================================================================================================================
+| **Task Manager (Windows)**         | **top (Linux)**   | **الشرح**                                                                                                          |
+| ---------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------|
+| **Process ID (PID)**               | **PID**           | رقم تعريف العملية (Process ID). في لينكس الـ kernel نفسه بياخد PID = 1 (عادةً عملية `systemd` أو `init`).                            |
+| **User**                           | **USER**          | اسم المستخدم اللي أنشأ العملية.                                                                                                                          
+| **Priority**                       | **PR**            | أولوية التنفيذ. في لينكس **PR = 20** هي القيمة العادية (Normal)، و**RT** تعني Real-Time (أعلى أولوية). النطاق الكلي من 0 (أعلى أولوية) إلى 39 (أقل أولوية). |
+| **Base Priority / Nice Value**     | **NI**            | الـ Nice Value للتحكم في أولوية العملية. المدى من **-20** (أعلى أولوية) إلى **+19** (أقل أولوية). القيم السالبة تعطي أولوية أعلى.                           |
+| **Change Priority (Set Priority)** | **nice / renice** | `nice` لتحديد أولوية أثناء إنشاء العملية، و`renice` لتعديل أولوية عملية موجودة.                                                                      
+==============================================================================================================================================================================
+| **الأمر**                  | **الوصف**                                                                 |
+| -------------------------- | ------------------------------------------------------------ |
+| `$ top`                    | عرض جميع العمليات على النظام بشكل حي.                                 |
+| `$ top -u mina`            | عرض العمليات الخاصة بالمستخدم "mina" فقط.                             |
+| `$ nice -n 10 top -u mina` | تشغيل أمر `top -u mina` بأولوية **PR = 30** (20 عادي + 10 Nice).    |
+| `$ renice -n 15 -p 12077`  | تعديل أولوية عملية موجودة PID = 12077 لتصبح PR = 35 (20 + 15).         |
+| **ملاحظة**                 | لا يمكن تقليل الـ Nice Value (أي رفع أولوية العملية) بدون صلاحيات `sudo`. |
+
+PR = 20 + NI   (لعمليات الـ user العادية)
+==============================================================================================================================================================================
+====================================================================pgrep-->search on process by name=====================================================================================================
+| **الأمر**                     | **الوصف**                                                                   |
+| ----------------------------- | ------------------------------------------------------------- |
+| `pgrep firefox`               | عرض PID لجميع عمليات Firefox النشطة.                              |
+| `pgrep -l firefox`            | عرض PID + اسم العملية.                                           |
+| `pgrep -u mina`               | عرض PID لجميع العمليات الخاصة بالمستخدم "mina".                        |
+| `pgrep -u mina top`           | عرض PID لعمليات "top" الخاصة بالمستخدم "mina".                      |
+| `pgrep -a ssh`                | عرض PID + المسار الكامل + الباراميترات لكل عملية تطابق "ssh".               |
+| `pgrep -f "python script.py"` | البحث بالاعتماد على السطر الكامل للأمر (مش بس اسم البرنامج).                     |
+-x exact match
+ctrl+z --> stop or suspend process
+==============================================================================================================================================================================
+redirect -->    ls > myls   --> create myls file if not exist then save output of command inide it (override)
+		ls >> myls  --> append output to myls
+
+if it an error and i want to redirect it: common use to filter error (do not show error in output) 
+$ ls /root 2> /dev/null
+
+send input in file to another
+$ mail helmi < myls   --> send input inside myls and send it as mail to helmi.
+
+$ wc /etc/passwd ---> word count lines -l, words -w, char -c
+$ grep bash /etc/passwd   --> search on bash keyword inside passwd file,  -i ignore for case sensitive, -x exact match, also can take regix
+$ find /etc -name passwd  --> search on file inside specific location, in this example we search on passwd file inside /etc location
